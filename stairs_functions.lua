@@ -1,6 +1,6 @@
 
 
-if minetest.get_modpath("moreblocks") then
+if minetest.get_modpath("hades_moreblocks") then
 	function darkage.register_stairs(nodeName)
         local ndef = assert(minetest.registered_nodes[nodeName], "Error: "..nodeName.." is not registered")
 
@@ -29,8 +29,8 @@ elseif minetest.get_modpath("stairs") then
         --stairs.register_stair_and_slab(subname, recipeitem,
         --                               groups, images, 
         --                               desc_stair, desc_slab, sounds)
-        minetest.register_alias("darkage:stair_"..node, "stairs:stair_darkage_"..node)
-        minetest.register_alias("darkage:slab_"..node, "stairs:slab_darkage_"..node)
+        minetest.register_alias("hades_darkage:stair_"..node, "stairs:stair_darkage_"..node)
+        minetest.register_alias("hades_darkage:slab_"..node, "stairs:slab_darkage_"..node)
     end
 else 
     -- No compatible stairs mod found.
@@ -42,7 +42,7 @@ end
 
 --[[
 if minetest.get_modpath("xdecor") then
-    table.insert(workbench.custom_nodes_register, "darkage:straw_bale") -- Straw Bale seems to accidently filtered out
+    table.insert(workbench.custom_nodes_register, "hades_darkage:straw_bale") -- Straw Bale seems to accidently filtered out
 end
 ]]
 -- Uncomment, to check if nodes get registered correctly

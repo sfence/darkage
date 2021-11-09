@@ -1,4 +1,4 @@
-minetest.register_node("darkage:chain", {
+minetest.register_node("hades_darkage:chain", {
 	description = "Chain",
 	drawtype = "signlike",
 	tiles = {"darkage_chain.png"},
@@ -29,11 +29,11 @@ local box_formspec = [[
 	listring[current_player;main]
 ]].. darkage.formbg
 
-minetest.register_node("darkage:box", {
+minetest.register_node("hades_darkage:box", {
 	description = "Box",
 	tiles = { "darkage_box_top.png","darkage_box_top.png","darkage_box.png"},
 	groups = { snappy = 3, not_cuttable=1 },
-	sounds = default.node_sound_wood_defaults(),
+	sounds = hades_sounds.node_sound_wood_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", box_formspec )
@@ -72,13 +72,13 @@ local shelves_formspec = [[
 	listring[current_player;main]
 ]].. darkage.formbg
 
-minetest.register_node("darkage:wood_shelves", {
+minetest.register_node("hades_darkage:wood_shelves", {
 	description = "Wooden Shelves",
 	tiles = { "darkage_shelves.png","darkage_shelves.png","darkage_shelves.png",
 			  "darkage_shelves.png","darkage_shelves.png","darkage_shelves_front.png"},
 	paramtype2 = "facedir",
 	groups = { snappy = 3, not_cuttable=1 },
-	sounds = default.node_sound_wood_defaults(),
+	sounds = hades_sounds.node_sound_wood_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", shelves_formspec)
@@ -106,15 +106,15 @@ minetest.register_node("darkage:wood_shelves", {
 	end,
 })
 
---minetest.register_node("darkage:rosace", {
+--minetest.register_node("hades_darkage:rosace", {
 --	description = "Rose Window",
 --	tiles = {"darkage_rosace.png"},
 --	is_ground_content = false,
 --	groups = {cracky=3},
---	sounds = default.node_sound_stone_defaults()
+--	sounds = hades_sounds.node_sound_stone_defaults()
 --})
 
-minetest.register_node("darkage:iron_bars", {
+minetest.register_node("hades_darkage:iron_bars", {
 	description = "Iron Bars",
 	drawtype = "glasslike",
 	tiles = {"darkage_iron_bars.png"},
@@ -124,20 +124,20 @@ minetest.register_node("darkage:iron_bars", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {cracky=3 , not_cuttable=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
-minetest.register_node("darkage:lamp", {
+minetest.register_node("hades_darkage:lamp", {
 	description = "Lamp",
 	tiles = { "darkage_lamp.png" },
 	paramtype = "light",
 	sunlight_propagates = true,
-	light_source = default.LIGHT_MAX-1,
+	light_source = minetest.LIGHT_MAX-1,
 	groups = {snappy=2, cracky=3, oddly_breakable_by_hand=3, flammable=1 , not_cuttable=1},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = hades_sounds.node_sound_glass_defaults(),
 })
 
-minetest.register_node("darkage:iron_grille", {
+minetest.register_node("hades_darkage:iron_grille", {
 	description = "Iron Grille",
 	drawtype = "glasslike",
 	tiles = {"darkage_iron_grille.png"},
@@ -147,10 +147,10 @@ minetest.register_node("darkage:iron_grille", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {cracky=3 , not_cuttable=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
-minetest.register_node("darkage:wood_bars", {
+minetest.register_node("hades_darkage:wood_bars", {
 	description = "Wooden Bars",
 	drawtype = "glasslike",
 	tiles = {"darkage_wood_bars.png"},
@@ -160,10 +160,10 @@ minetest.register_node("darkage:wood_bars", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {snappy=1, choppy=2, not_cuttable=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
-minetest.register_node("darkage:wood_grille", {
+minetest.register_node("hades_darkage:wood_grille", {
 	description = "Wooden Grille",
 	drawtype = "glasslike",
 	tiles = {"darkage_wood_grille.png"},
@@ -173,10 +173,10 @@ minetest.register_node("darkage:wood_grille", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {snappy=1, choppy=2, not_cuttable=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
-minetest.register_node("darkage:wood_frame", {
+minetest.register_node("hades_darkage:wood_frame", {
 	description = "Wooden Frame",
 	drawtype = "glasslike_framed",
 	tiles = {"darkage_wood_frame.png"},
@@ -186,7 +186,7 @@ minetest.register_node("darkage:wood_frame", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {snappy=1, choppy=2, oddly_breakable_by_hand = 3, not_cuttable=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
 ---------------
@@ -199,52 +199,52 @@ minetest.register_node("darkage:wood_frame", {
 ----------
 
 minetest.register_craft({
-	output = "darkage:box",
+	output = "hades_darkage:box",
 	recipe = {
-		{"default:wood", "", "default:wood"},
+		{"hades_core:wood", "", "hades_core:wood"},
 		{"",			 "", ""},
-		{"default:wood", "", "default:wood"},
+		{"hades_core:wood", "", "hades_core:wood"},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:chain 2",
+	output = "hades_darkage:chain 2",
 	recipe = {
-		{"darkage:iron_stick"},
-		{"darkage:iron_stick"},
-		{"darkage:iron_stick"},
+		{"hades_darkage:iron_stick"},
+		{"hades_darkage:iron_stick"},
+		{"hades_darkage:iron_stick"},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:iron_bars 2",
+	output = "hades_darkage:iron_bars 2",
 	recipe = {
-		{"darkage:iron_stick", "", "darkage:iron_stick"},
-		{"darkage:iron_stick", "", "darkage:iron_stick"},
-		{"darkage:iron_stick", "", "darkage:iron_stick"},
+		{"hades_darkage:iron_stick", "", "hades_darkage:iron_stick"},
+		{"hades_darkage:iron_stick", "", "hades_darkage:iron_stick"},
+		{"hades_darkage:iron_stick", "", "hades_darkage:iron_stick"},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:iron_grille 3",
+	output = "hades_darkage:iron_grille 3",
 	recipe = {
-    {"",					"darkage:iron_bars",	""},
-    {"darkage:iron_bars",	"",						"darkage:iron_bars"},
-    {"",					"darkage:iron_bars",	""},
+    {"",					"hades_darkage:iron_bars",	""},
+    {"hades_darkage:iron_bars",	"",						"hades_darkage:iron_bars"},
+    {"",					"hades_darkage:iron_bars",	""},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:lamp",
+	output = "hades_darkage:lamp",
 	recipe = {
 		{"group:stick",	"",				 "group:stick"},
-		{"",			"default:torch", ""},
+		{"",			"hades_core:torch", ""},
 		{"group:stick",	"",				 "group:stick"},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:wood_bars 2",
+	output = "hades_darkage:wood_bars 2",
 	recipe = {
     {"group:stick", "", "group:stick"},
     {"group:stick", "", "group:stick"},
@@ -253,27 +253,27 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "darkage:wood_grille 3",
+	output = "hades_darkage:wood_grille 3",
 	recipe = {
-		{"",					"darkage:wood_bars", ""},
-		{"darkage:wood_bars",	"",					 "darkage:wood_bars"},
-		{"",					"darkage:wood_bars", ""},
+		{"",					"hades_darkage:wood_bars", ""},
+		{"hades_darkage:wood_bars",	"",					 "hades_darkage:wood_bars"},
+		{"",					"hades_darkage:wood_bars", ""},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:wood_shelves",
+	output = "hades_darkage:wood_shelves",
 	recipe = {
-		{"darkage:box"},
-		{"darkage:box"},
+		{"hades_darkage:box"},
+		{"hades_darkage:box"},
 	}
 })
 
 minetest.register_craft({
-	output = "darkage:wood_frame",
+	output = "hades_darkage:wood_frame",
 	recipe = {
 		{"group:stick",	"",					"group:stick"},
-		{"",			"default:glass",	""},
+		{"",			"hades_core:glass",	""},
 		{"group:stick",	"",					"group:stick"},
 	}
 })
@@ -282,8 +282,8 @@ minetest.register_craft({
 -- Cookings
 minetest.register_craft({
 	type = "cooking",
-	output = "default:glass",
-	recipe = "darkage:wood_frame",
+	output = "hades_core:glass",
+	recipe = "hades_darkage:wood_frame",
 })
 
 

@@ -152,20 +152,20 @@ function darkage.register_reinforce(name, craftItem, nodedef)
 	})
 end
 
-darkage.register_reinforce("Chalk", "darkage:chalk_powder", {
+darkage.register_reinforce("Chalk", "hades_darkage:chalk_powder", {
 	tiles = {"darkage_chalk.png"},
 	groups = {cracky=3},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
-darkage.register_reinforce("Wood", "default:wood", {
+darkage.register_reinforce("Wood", "hades_core:wood", {
 	tiles = {"default_wood.png"},
 	groups = {snappy=2, choppy=3, flammable=3},
-	sounds = default.node_sound_wood_defaults()
+	sounds = hades_sounds.node_sound_wood_defaults()
 })
 
-darkage.register_reinforce("Chalked Bricks", "darkage:chalked_bricks", {
+darkage.register_reinforce("Chalked Bricks", "hades_darkage:chalked_bricks", {
 	tiles = {"darkage_chalked_bricks.png"},
 	groups = {cracky = 2, stone = 1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = hades_sounds.node_sound_stone_defaults()
 })
