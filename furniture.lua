@@ -201,9 +201,9 @@ minetest.register_node("hades_darkage:wood_frame", {
 minetest.register_craft({
 	output = "hades_darkage:box",
 	recipe = {
-		{"hades_core:wood", "", "hades_core:wood"},
+		{"hades_trees:wood", "", "hades_trees:wood"},
 		{"",			 "", ""},
-		{"hades_core:wood", "", "hades_core:wood"},
+		{"hades_trees:wood", "", "hades_trees:wood"},
 	}
 })
 

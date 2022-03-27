@@ -49,6 +49,7 @@ minetest.register_craftitem("hades_darkage:iron_stick", {
 -- Crafts
 ----------
 
+--[[
 minetest.register_craft({
 	output = "hades_darkage:adobe 4",
 	recipe = {
@@ -56,6 +57,7 @@ minetest.register_craft({
 		{"hades_core:clay_lump",	"hades_farming:straw"},
 	}
 })
+--]]
 
 --[[
 	Basalt
@@ -79,8 +81,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:basalt_brick 4",
 	recipe = {
-		{"hades_darkage:basalt", "hades_darkage:basalt"},
-		{"hades_darkage:basalt", "hades_darkage:basalt"},
+		{"hades_darkage:basalt", "hades_darkage:basalt", ""},
+		{"", "hades_darkage:basalt", "hades_darkage:basalt"},
 	}
 })
 
@@ -153,8 +155,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:gneiss_brick 4",
 	recipe = {
-		{"hades_darkage:gneiss", "hades_darkage:gneiss"},
-		{"hades_darkage:gneiss", "hades_darkage:gneiss"},
+		{"hades_darkage:gneiss", "hades_darkage:gneiss", ""},
+		{"", "hades_darkage:gneiss", "hades_darkage:gneiss"},
 	}
 })
 
@@ -192,8 +194,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:limestone_brick 4",
 	recipe = {
-		{"hades_darkage:limestone", "hades_darkage:limestone"},
-		{"hades_darkage:limestone", "hades_darkage:limestone"},
+		{"hades_darkage:limestone", "hades_darkage:limestone", ""},
+		{"", "hades_darkage:limestone", "hades_darkage:limestone"},
 	}
 })
 
@@ -234,8 +236,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:ors_brick 4",
 	recipe = {
-		{"hades_darkage:ors", "hades_darkage:ors"},
-		{"hades_darkage:ors", "hades_darkage:ors"},
+		{"hades_darkage:ors", "hades_darkage:ors", ""},
+		{"", "hades_darkage:ors", "hades_darkage:ors"},
 	}
 })
 
@@ -276,8 +278,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:slate_brick 4",
 	recipe = {
-		{"hades_darkage:slate", "hades_darkage:slate"},
-		{"hades_darkage:slate", "hades_darkage:slate"},
+		{"hades_darkage:slate", "hades_darkage:slate", ""},
+		{"", "hades_darkage:slate", "hades_darkage:slate"},
 	}
 })
 
@@ -299,9 +301,10 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "hades_darkage:stone_brick",
+	output = "hades_darkage:stone_brick 4",
 	recipe = {
-		{"hades_core:stone_block"},
+		{"hades_core:stone_block", "hades_core:stone_block", ""},
+		{"", "hades_core:stone_block", "hades_core:stone_block"},
 	}
 })
 
@@ -348,11 +351,13 @@ minetest.register_craft({
 })
 --]]
 
+--[[
 minetest.register_craft({
 	type = "cooking",
 	output = "hades_darkage:slate",
 	recipe = "hades_darkage:shale",
 })
+--]]
 
 minetest.register_craft({
 	type = "cooking",
@@ -361,13 +366,15 @@ minetest.register_craft({
 })
 
 -- Desert
+--[[
 minetest.register_craft({
 	type = "cooking",
 	output = "hades_darkage:ors_brick",
-	recipe = "hades_core:desert_stone",
-})
+	recipe = "hades_core:stonebrick_baked",
+})--]]
 
 -- Tuff
+--[[
 minetest.register_craft({
 	output = "hades_darkage:tuff 2",
 	recipe = {
@@ -375,6 +382,7 @@ minetest.register_craft({
 		{"hades_core:stone", "hades_darkage:gneiss"},
 	}
 })
+--]]
 
 minetest.register_craft({
 	type = "cooking",
@@ -391,12 +399,13 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:tuff_bricks 4",
 	recipe = {
-		{"hades_darkage:tuff", "hades_darkage:tuff"},
-		{"hades_darkage:tuff", "hades_darkage:tuff"},
+		{"hades_darkage:tuff", "hades_darkage:tuff", ""},
+		{"", "hades_darkage:tuff", "hades_darkage:tuff"},
 	}
 })
 
 -- Rhyolitic Tuff
+--[[
 minetest.register_craft({
 	output = "hades_darkage:rhyolitic_tuff 2",
 	recipe = {
@@ -404,6 +413,7 @@ minetest.register_craft({
 		{"hades_core:desert_stone", "hades_darkage:gneiss"},
 	}
 })
+--]]
 
 minetest.register_craft({
 	type = "cooking",
@@ -414,7 +424,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "hades_darkage:rhyolitic_tuff_bricks 4",
 	recipe = {
-		{"hades_darkage:rhyolitic_tuff", "hades_darkage:rhyolitic_tuff"},
-		{"hades_darkage:rhyolitic_tuff", "hades_darkage:rhyolitic_tuff"},
+		{"hades_darkage:rhyolitic_tuff", "hades_darkage:rhyolitic_tuff", ""},
+		{"", "hades_darkage:rhyolitic_tuff", "hades_darkage:rhyolitic_tuff"},
 	}
 })

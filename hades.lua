@@ -14,8 +14,9 @@ local function add_metamorphosis_report(node_name, report)
 end
 
 function half_time_calc(interval, chance, treshold)
-  local steps = math.log(1/(interval+1))/math.log((chance-1)/chance)
-  return math.floor(steps*interval/360+0.5)/10
+  local steps = math.log(0.5)/math.log((chance-1)/chance)
+  -- 1.41 like calculation error compensation for param_treshold 15
+  return math.floor(1.41*(treshold+1)*steps*interval/360+0.5)/10
 end
 
 local param_treshold = 15
@@ -27,11 +28,11 @@ minetest.register_abm({
   nodenames = {"hades_core:tuff_baked"},
 	neighbors = {"group:water"},
 	interval = 337,
-	chance = 67,
+	chance = 31,
   action = function(pos, node)
     if (minetest.find_node_near(pos, 1, {"group:lava"}) ~= nil) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:rhyolitic_tuff"})
 			else
 				minetest.swap_node(pos, node)
@@ -41,7 +42,7 @@ minetest.register_abm({
 })
 
 add_metamorphosis_report("hades_core:tuff_baked",
-    string.format(S("Burned tuff metamorphoses into burned stone. It requires contact with water and lava. Half-metamorphose time is %i hours."),half_time_calc(337, 67, param_treshold))
+    string.format(S("Burned tuff metamorphoses into rhyolitic tuff. It requires contact with water and lava. Half-metamorphose time is %i hours."),half_time_calc(337, 31, param_treshold))
   )
 
 add_metamorphosis_report("hades_darkage:rhyolitic_tuff", 
@@ -58,7 +59,7 @@ minetest.register_abm({
 	chance = 29,
   action = function(pos, node)
 		node.param1 = node.param1 + 1
-		if (node.param1>=param_treshold) then
+		if (node.param1>param_treshold) then
 			minetest.set_node(pos, {name="hades_darkage:tuff"})
 		else
 			minetest.swap_node(pos, node)
@@ -96,7 +97,7 @@ minetest.register_abm({
 			elseif (minetest.find_node_near(pos, 1, {"hades_core:clay"})~=nil) then
 				node.param1 = node.param1 + 1
 			end
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:schist"})
 			else
 				minetest.swap_node(pos, node)
@@ -131,7 +132,7 @@ minetest.register_abm({
   action = function(pos, node)
     if (pos.y>-347) and (minetest.find_node_near(pos, 3, {"air"}) == nil) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:serpentine"})
 			else
 				minetest.swap_node(pos, node)
@@ -143,9 +144,15 @@ minetest.register_abm({
 add_metamorphosis_report("hades_darkage:basalt",
     string.format(S("Basalt metamorphoses into serpentine in level above -347. It requires contact with water and without air near (up to 3 nodes). Half-metamorphose time is %i hours."),half_time_calc(827, 61, param_treshold))
   )
-add_metamorphosis_report("hades_technic:granite",
-    string.format(S("Granite metamorphoses into serpentine in level above -347. It requires contact with water and without air near (up to 3 nodes). Half-metamorphose time is %i hours."),half_time_calc(827, 61, param_treshold))
-  )
+
+if minetest.get_modpath("hades_technic_worldgen") then
+  minetest.register_on_mods_loaded(
+    function ()
+      add_metamorphosis_report("hades_technic:granite",
+          string.format(S("Granite metamorphoses into serpentine in level above -347. It requires contact with water and without air near (up to 3 nodes). Half-metamorphose time is %i hours."),half_time_calc(827, 61, param_treshold))
+        )
+    end)
+end
 
 add_metamorphosis_report("hades_darkage:serpentine", 
     S("Serpentine arise by metamorphosis from basalt and granite.")
@@ -166,7 +173,7 @@ minetest.register_abm({
 			elseif (minetest.find_node_near(pos, 1, {"hades_core:clay"})~=nil) then
 				node.param1 = node.param1 + 1
 			end
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:shale"})
 			else
 				minetest.swap_node(pos, node)
@@ -201,7 +208,7 @@ minetest.register_abm({
   action = function(pos, node)
     if (minetest.find_node_near(pos, 4, {"hades_core:water_flowing"}) == nil) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:silt"})
 			else
 				minetest.swap_node(pos, node)
@@ -225,12 +232,12 @@ minetest.register_abm({
   label = "Create slate",
   nodenames = {"hades_darkage:shale"},
 	neighbors = {"group:lava"},
-	interval = 1031,
+	interval = 487,
 	chance = 211,
   action = function(pos, node)
     if (pos.y<-9973) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:slate"})
 			else
 				minetest.swap_node(pos, node)
@@ -240,7 +247,7 @@ minetest.register_abm({
 })
 
 add_metamorphosis_report("hades_darkage:shale",
-    string.format(S("Shale metamorphoses into slate in level bellow -9973. It requires contact with lava. Half-metamorphose time is %i hours."),half_time_calc(1031, 211, param_treshold))
+    string.format(S("Shale metamorphoses into slate in level bellow -9973. It requires contact with lava. Half-metamorphose time is %i hours."),half_time_calc(487, 211, param_treshold))
   )
 
 add_metamorphosis_report("hades_darkage:slate", 
@@ -258,7 +265,7 @@ minetest.register_abm({
   action = function(pos, node)
     if (minetest.find_node_near(pos, 2, {"air"}) == nil) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:mud"})
 			else
 				minetest.swap_node(pos, node)
@@ -281,12 +288,12 @@ minetest.register_abm({
   label = "Create marble",
   nodenames = {"hades_darkage:limestone"},
 	neighbors = {"group:lava"},
-	interval = 1031,
+	interval = 491,
 	chance = 223,
   action = function(pos, node)
-    if (pos.y<-9973) and (minetest.find_node_near(pos, 3, {"air"}) == nil) then
+    if (pos.y<-9973) and (minetest.find_node_near(pos, 3, {"air", "group:water"}) == nil) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:marble"})
 			else
 				minetest.swap_node(pos, node)
@@ -296,7 +303,7 @@ minetest.register_abm({
 })
 
 add_metamorphosis_report("hades_darkage:limestone",
-    string.format(S("Limestone metamorphoses into darkage marble at level bellow -9973. It requires contact with lava and without air near (up to 3 nodes). Half-metamorphose time is %i hours."),half_time_calc(1031, 223, param_treshold))
+    string.format(S("Limestone metamorphoses into darkage marble at level bellow -9973. It requires contact with lava and without air near (up to 3 nodes). Half-metamorphose time is %i hours."),half_time_calc(491, 223, param_treshold))
   )
 
 add_metamorphosis_report("hades_darkage:marble", 
@@ -307,12 +314,12 @@ add_metamorphosis_report("hades_darkage:marble",
 -- wind dust combined with seasonal water
 minetest.register_abm({
   label = "Create adobe",
-  nodenames = {"hades_core:ash", "hades_core:mud", "hades_core:silt"},
+  nodenames = {"hades_core:ash", "hades_darkage:mud", "hades_darkage:silt"},
 	neighbors = {"group:air"},
 	interval = 787,
-	chance = 503,
+	chance = 53,
   action = function(pos, node)
-    if (pos.y<75) then
+    if (pos.y<65) then
       return 
     end
     pos.y = pos.y + 1
@@ -344,13 +351,13 @@ minetest.register_abm({
 })
 
 add_metamorphosis_report("hades_core:ash",
-    string.format(S("Ash metamorphoses into adobe at level above 75. It requires contact with surface air above, 300 air nodes or more in area 7x7x7 and without water near in metamorphosing time but with water near in sedimentation time (up to 4 nodes). Half-metamorphose time is %i hours."),half_time_calc(787, 503, param_treshold+1))
+    string.format(S("Ash metamorphoses into adobe at level above 65. It requires contact with surface air above, 300 air nodes or more in area 7x7x7 and without water near in metamorphosing time but with water near in sedimentation time (up to 4 nodes). Half-metamorphose time is %i hours."),half_time_calc(787, 53, param_treshold+1))
   )
 add_metamorphosis_report("hades_darkage:mud",
-    string.format(S("Mud metamorphoses into adobe at level above 75. It requires contact with surface air above, 300 air nodes or more in area 7x7x7 and without water near in metamorphosing time but with water near in sedimentation time (up to 4 nodes). Half-metamorphose time is %i hours."),half_time_calc(787, 503, param_treshold+1))
+    string.format(S("Mud metamorphoses into adobe at level above 65. It requires contact with surface air above, 300 air nodes or more in area 7x7x7 and without water near in metamorphosing time but with water near in sedimentation time (up to 4 nodes). Half-metamorphose time is %i hours."),half_time_calc(787, 53, param_treshold+1))
   )
 add_metamorphosis_report("hades_darkage:silt",
-    string.format(S("Silt metamorphoses into adobe at level above 75. It requires contact with surface air above, 300 air nodes or more in area 7x7x7 and without water near in metamorphosing time but with water near in sedimentation time (up to 4 nodes). Half-metamorphose time is %i hours."),half_time_calc(787, 503, param_treshold+1))
+    string.format(S("Silt metamorphoses into adobe at level above 65. It requires contact with surface air above, 300 air nodes or more in area 7x7x7 and without water near in metamorphosing time but with water near in sedimentation time (up to 4 nodes). Half-metamorphose time is %i hours."),half_time_calc(787, 53, param_treshold+1))
   )
 
 add_metamorphosis_report("hades_darkage:adobe", 
@@ -359,7 +366,7 @@ add_metamorphosis_report("hades_darkage:adobe",
 
 -- chalk
 -- from sea microorganishm shells
-if minetest.get_modpath("hades_xoceans")~=nil then
+if minetest.get_modpath("hades_xocean")~=nil then
 	minetest.register_abm({
 		label = "Create chalk",
 		nodenames = {"group:coral_skeleton"},
@@ -368,7 +375,7 @@ if minetest.get_modpath("hades_xoceans")~=nil then
 		action = function(pos, node)
 			if (minetest.find_node_near(pos, 2, {"air", "group:water", "group:lava"}) == nil) then
 				node.param1 = node.param1 + 1
-				if (node.param1>=param_treshold) then
+				if (node.param1>param_treshold) then
 					minetest.set_node(pos, {name="hades_darkage:chalk"})
 				else
 					minetest.swap_node(pos, node)
@@ -377,19 +384,19 @@ if minetest.get_modpath("hades_xoceans")~=nil then
 		end,
   })
 
-  add_metamorphosis_report("hades_xoceans:brain_skeleton",
+  add_metamorphosis_report("hades_xocean:brain_skeleton",
       string.format(S("Coral skeleton metamorphoses into chalk. It requires NO contact with air near, water near and lava near (up to 2 nodes). Half-metamorphose time is %i hours."),half_time_calc(883, 59, param_treshold))
     )
-  add_metamorphosis_report("hades_xoceans:tube_skeleton",
+  add_metamorphosis_report("hades_xocean:tube_skeleton",
       string.format(S("Coral skeleton metamorphoses into chalk. It requires NO contact with air near, water near and lava near (up to 2 nodes). Half-metamorphose time is %i hours."),half_time_calc(883, 59, param_treshold))
     )
-  add_metamorphosis_report("hades_xoceans:bubble_skeleton",
+  add_metamorphosis_report("hades_xocean:bubble_skeleton",
       string.format(S("Coral skeleton metamorphoses into chalk. It requires NO contact with air near, water near and lava near (up to 2 nodes). Half-metamorphose time is %i hours."),half_time_calc(883, 59, param_treshold))
     )
-  add_metamorphosis_report("hades_xoceans:coral_skeleton",
+  add_metamorphosis_report("hades_xocean:coral_skeleton",
       string.format(S("Coral skeleton metamorphoses into chalk. It requires NO contact with air near, water near and lava near (up to 2 nodes). Half-metamorphose time is %i hours."),half_time_calc(883, 59, param_treshold))
     )
-  add_metamorphosis_report("hades_xoceans:fire_skeleton",
+  add_metamorphosis_report("hades_xocean:fire_skeleton",
       string.format(S("Coral skeleton metamorphoses into chalk. It requires NO contact with air near, water near and lava near (up to 2 nodes). Half-metamorphose time is %i hours."),half_time_calc(883, 59, param_treshold))
     )
 
@@ -404,11 +411,11 @@ minetest.register_abm({
   label = "Create limestone",
   nodenames = {"hades_darkage:chalk"},
 	interval = 1031,
-	chance = 199,
+	chance = 99,
   action = function(pos, node)
     if (pos.y<-2111) and (minetest.find_node_near(pos, 5, {"air", "group:water", "group:lava"}) == nil) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:limestone"})
 			else
 				minetest.swap_node(pos, node)
@@ -418,7 +425,7 @@ minetest.register_abm({
 })
 
 add_metamorphosis_report("hades_darkage:chalk",
-    string.format(S("Chalk metamorphoses into limestone at level bellow -2111. It requires NO contact with lava near, water near and air near (up to 5 nodes). Half-metamorphose time is %i hours."),half_time_calc(1031, 199, param_treshold))
+    string.format(S("Chalk metamorphoses into limestone at level bellow -2111. It requires NO contact with lava near, water near and air near (up to 5 nodes). Half-metamorphose time is %i hours."),half_time_calc(1031, 99, param_treshold))
   )
 
 add_metamorphosis_report("hades_darkage:limestone", 
@@ -436,7 +443,7 @@ minetest.register_abm({
 	chance = 17,
   action = function(pos, node)
 		node.param1 = node.param1 + 1
-		if (node.param1>=param_treshold) then
+		if (node.param1>param_treshold) then
 			minetest.set_node(pos, {name="hades_darkage:basalt"})
 		else
 			minetest.swap_node(pos, node)
@@ -465,7 +472,7 @@ minetest.register_abm({
   action = function(pos, node)
 		if (pos.y<-21067) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:gneiss"})
 			else
 				minetest.swap_node(pos, node)
@@ -482,7 +489,7 @@ minetest.register_abm({
   action = function(pos, node)
 		if (pos.y<-21067) then
 			node.param1 = node.param1 + 1
-			if (node.param1>=param_treshold) then
+			if (node.param1>param_treshold) then
 				minetest.set_node(pos, {name="hades_darkage:gneiss"})
 			else
 				minetest.swap_node(pos, node)
@@ -494,9 +501,15 @@ minetest.register_abm({
 add_metamorphosis_report("hades_darkage:basalt",
     string.format(S("Basalt metamorphoses into gneiss at level below -21067. It requires contact with lava. Half-metamorphose time is %i hours."),half_time_calc(1193, 37, param_treshold))
   )
-add_metamorphosis_report("hades_technic:granite",
-    string.format(S("Granite metamorphoses into gneiss at level below -21067. It requires contact with lava. Half-metamorphose time is %i hours."),half_time_calc(1193, 37, param_treshold))
-  )
+
+if minetest.get_modpath("hades_technic_worldgen") then
+  minetest.register_on_mods_loaded(
+    function ()
+      add_metamorphosis_report("hades_technic:granite",
+          string.format(S("Granite metamorphoses into gneiss at level below -21067. It requires contact with lava. Half-metamorphose time is %i hours."),half_time_calc(1193, 37, param_treshold))
+        )
+    end)
+end
 
 add_metamorphosis_report("hades_darkage:shale",
     string.format(S("Shale metamorphoses into gneiss at level below -21067. It requires contact with lava. Half-metamorphose time is %i hours."),half_time_calc(1193, 53, param_treshold))

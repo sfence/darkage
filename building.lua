@@ -158,11 +158,37 @@ darkage.register_reinforce("Chalk", "hades_darkage:chalk_powder", {
 	sounds = hades_sounds.node_sound_stone_defaults()
 })
 
-darkage.register_reinforce("Wood", "hades_core:wood", {
+darkage.register_reinforce("Canvas Wood", "hades_trees:colwood_uncolored", {
+	tiles = {"hades_trees_colwood_uncolored.png"},
+	groups = {snappy=2, choppy=3, flammable=3},
+	sounds = hades_sounds.node_sound_wood_defaults()
+})
+
+darkage.register_reinforce("Cream Wood", "hades_trees:cream_wood", {
+	tiles = {"hades_trees_cream_wood.png"},
+	groups = {snappy=2, choppy=3, flammable=3},
+	sounds = hades_sounds.node_sound_wood_defaults()
+})
+
+darkage.register_reinforce("Lush Wood", "hades_trees:lush_wood", {
+	tiles = {"hades_trees_lush_wood.png"},
+	groups = {snappy=2, choppy=3, flammable=3},
+	sounds = hades_sounds.node_sound_wood_defaults()
+})
+
+darkage.register_reinforce("Pale Wood", "hades_trees:pale_wood", {
+	tiles = {"hades_trees_pale_wood.png"},
+	groups = {snappy=2, choppy=3, flammable=3},
+	sounds = hades_sounds.node_sound_wood_defaults()
+})
+
+darkage.register_reinforce("Wood", "hades_trees:wood", {
 	tiles = {"default_wood.png"},
 	groups = {snappy=2, choppy=3, flammable=3},
 	sounds = hades_sounds.node_sound_wood_defaults()
 })
+
+-- no jungle and charred wood, are too dark
 
 darkage.register_reinforce("Chalked Bricks", "hades_darkage:chalked_bricks", {
 	tiles = {"darkage_chalked_bricks.png"},

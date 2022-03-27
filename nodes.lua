@@ -110,6 +110,7 @@ minetest.register_lbm({
 	end
 })
 
+--[[
 minetest.register_node("hades_darkage:desert_stone_with_iron", {
 	description = "Desert Iron Ore",
 	tiles = {"default_desert_stone.png^default_mineral_iron.png"},
@@ -118,6 +119,7 @@ minetest.register_node("hades_darkage:desert_stone_with_iron", {
 	drop = 'hades_core:iron_lump',
 	sounds = hades_sounds.node_sound_stone_defaults(),
 })
+--]]
 
 minetest.register_node("hades_darkage:darkdirt", {
 	description = "Dark Dirt",
