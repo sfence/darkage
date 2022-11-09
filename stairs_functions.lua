@@ -12,7 +12,7 @@ if minetest.get_modpath("hades_moreblocks") then
 
         stairsplus:register_all(mod, node, nodeName, def)
     end
-elseif minetest.get_modpath("stairs") then
+elseif minetest.get_modpath("hades_stairs") then
 	function darkage.register_stairs(nodeName)
         local ndef = assert(minetest.registered_nodes[nodeName], "Error: "..nodeName.." is not registered")
 
@@ -21,7 +21,7 @@ elseif minetest.get_modpath("stairs") then
         -- The stairs api does not allow to use the darkage modname, so we have to call the nodes stairs:stair_darkage_
         -- and creating an alias
         local subname = "darkage_".. node; 
-        stairs.register_stair_and_slab(subname, nodeName,
+        hades_stairs.register_stair_and_slab(subname, nodeName,
                                        ndef.groups, ndef.tiles, 
                                        ndef.description.." Stair", ndef.description.." Slab",
                                        ndef.sounds)
@@ -29,8 +29,8 @@ elseif minetest.get_modpath("stairs") then
         --stairs.register_stair_and_slab(subname, recipeitem,
         --                               groups, images, 
         --                               desc_stair, desc_slab, sounds)
-        minetest.register_alias("hades_darkage:stair_"..node, "stairs:stair_darkage_"..node)
-        minetest.register_alias("hades_darkage:slab_"..node, "stairs:slab_darkage_"..node)
+        minetest.register_alias("hades_darkage:stair_"..node, "hades_stairs:stair_darkage_"..node)
+        minetest.register_alias("hades_darkage:slab_"..node, "hades_stairs:slab_darkage_"..node)
     end
 else 
     -- No compatible stairs mod found.

@@ -88,6 +88,7 @@ minetest.register_abm({
 	neighbors = {"group:lava"},
 	interval = 503,
 	chance = 109,
+  max_y = -9973,
   action = function(pos, node)
     if (pos.y<-9973) 
 				and (minetest.find_node_near(pos, 3, {"air"}) == nil) then
@@ -129,6 +130,7 @@ minetest.register_abm({
 	neighbors = {"group:water"},
 	interval = 827,
 	chance = 61,
+  min_y = -347,
   action = function(pos, node)
     if (pos.y>-347) and (minetest.find_node_near(pos, 3, {"air"}) == nil) then
 			node.param1 = node.param1 + 1
@@ -234,6 +236,7 @@ minetest.register_abm({
 	neighbors = {"group:lava"},
 	interval = 487,
 	chance = 211,
+  max_y = -9973,
   action = function(pos, node)
     if (pos.y<-9973) then
 			node.param1 = node.param1 + 1
@@ -290,6 +293,7 @@ minetest.register_abm({
 	neighbors = {"group:lava"},
 	interval = 491,
 	chance = 223,
+  max_y = -9973,
   action = function(pos, node)
     if (pos.y<-9973) and (minetest.find_node_near(pos, 3, {"air", "group:water"}) == nil) then
 			node.param1 = node.param1 + 1
@@ -318,6 +322,7 @@ minetest.register_abm({
 	neighbors = {"group:air"},
 	interval = 787,
 	chance = 53,
+  min_y = 65,
   action = function(pos, node)
     if (pos.y<65) then
       return 
@@ -412,6 +417,7 @@ minetest.register_abm({
   nodenames = {"hades_darkage:chalk"},
 	interval = 1031,
 	chance = 99,
+  max_y = -2111,
   action = function(pos, node)
     if (pos.y<-2111) and (minetest.find_node_near(pos, 5, {"air", "group:water", "group:lava"}) == nil) then
 			node.param1 = node.param1 + 1
@@ -469,6 +475,7 @@ minetest.register_abm({
 	neighbors = {"group:lava"},
 	interval = 1193,
 	chance = 37,
+  max_y = -21067,
   action = function(pos, node)
 		if (pos.y<-21067) then
 			node.param1 = node.param1 + 1
@@ -486,6 +493,7 @@ minetest.register_abm({
 	neighbors = {"group:lava"},
 	interval = 1193,
 	chance = 53,
+  max_y = -21067,
   action = function(pos, node)
 		if (pos.y<-21067) then
 			node.param1 = node.param1 + 1
